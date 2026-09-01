@@ -1,5 +1,6 @@
 package com.esempio.gestionale_concessionaria;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class VeicoloController {
     }
 
     @PostMapping("/automobili")
-    public ResponseEntity<VeicoloResponse> creaAutomobile(@RequestBody NuovaAutomobileRequest richiesta) {
+    public ResponseEntity<VeicoloResponse> creaAutomobile(@Valid @RequestBody NuovaAutomobileRequest richiesta) {
         Automobile salvata = repository.save(new Automobile(richiesta.marca(), richiesta.modello(), richiesta.annoImmatricolazione(), richiesta.numeroPosti()));
         return ResponseEntity.status(HttpStatus.CREATED).body(VeicoloResponse.from(salvata));
     }

@@ -10,6 +10,7 @@ public class VenditaTest {
     @Test
     void prezzoNegativoLanciaEccezione() {
         Veicolo v = new Automobile("Fiat", "Panda", 2020, 5);
-        assertThrows(IllegalArgumentException.class, () -> new Vendita(v, LocalDate.now(), -100));
+        Cliente c = new Cliente("Mario Rossi", "mario.rossi@example.com", "332345466");
+        assertThrows(IllegalArgumentException.class, () -> new Vendita(v, c, LocalDate.now(), -100));
     }
 }

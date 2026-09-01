@@ -38,4 +38,12 @@ public class GestoreErrori {
         problema.setTitle("Credenziali non valide");
         return problema;
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ProblemDetail gestisciStatoNonValido(IllegalStateException ex) {
+        ProblemDetail problema = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+        problema.setTitle("Operazione non consentita");
+        problema.setDetail(ex.getMessage());
+        return problema;
+    }
 }

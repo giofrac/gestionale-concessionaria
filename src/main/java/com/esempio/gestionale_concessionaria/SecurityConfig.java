@@ -1,6 +1,7 @@
 package com.esempio.gestionale_concessionaria;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -53,7 +54,7 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/veicoli/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
